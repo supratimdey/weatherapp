@@ -4,7 +4,7 @@ const argv = require('yargs').argv;
 let apiKey = '0e32fc352ee82286d41f814b44e4dfe9'
 let city = argv.c ||'Hyderabad'
 let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-
+// calling the rquest 
 request(url,function(err,response, body){
   if (err) {
     console.log('Error :', err);
