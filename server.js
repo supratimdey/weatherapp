@@ -13,11 +13,11 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', function (req, res) {
-  res.render('index')
+  res.render('index', {weather: null, error: null})
 })
 
 app.post('/' , function (req,res) {
-    let city = req.body.city || 'Hyderabad';
+    let city = req.body.City;
     let apiKey = require('./config/apikey')
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
@@ -27,8 +27,9 @@ app.post('/' , function (req,res) {
           res.render('index',{ weather: null, error: 'Error, please try again'} )
         } else {
           let weather = JSON.parse(body);
+          
           let weatherText = `It's ${weather.main.temp} degree c at ${weather.name},${weather.sys.country}`
-          console.log(message);
+          console.log(weatherText);
           res.render('index', {weather: weatherText, error: null});
         }
       });
